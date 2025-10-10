@@ -94,3 +94,13 @@ export const handleGoogleAuth = async (req, res, next) => {
     next(error);
   }
 }
+
+export const handleUserSignOut = (req, res, next) => {
+  try {
+    res.clearCookie('token');
+    res.status(200).json({ message: 'User has been signed out!' });
+  }
+  catch (error) {
+    next(error);
+  }
+}
