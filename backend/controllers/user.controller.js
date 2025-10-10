@@ -2,9 +2,6 @@ import { handleError } from "../utils/error.js";
 import bcryptjs from 'bcryptjs';
 import User from '../models/user.model.js';
 
-export const handleTestApiRoute = (req, res) => {
-  res.send("Hi! Getting Response from Server");
-}
 
 export const handleProfileUpdate = async (req, res, next) => {
   if (req.user.id !== req.params.id) {
