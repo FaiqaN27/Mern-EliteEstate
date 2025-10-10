@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserFailure, updateUserStart, updateUserSuccess } from '../redux/user/userSlice';
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../redux/user/userSlice';
 
 const Profile = () => {
 
@@ -40,6 +40,26 @@ const Profile = () => {
       dispatch(updateUserFailure(err.message));
     }
   }
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+
+    }
+    catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  }
+
   return (
     <div className='p-3 max-w-lg mx-auto mb-12'>
 
@@ -60,7 +80,7 @@ const Profile = () => {
       {/* <button className='bg-green-700 p-3 rounded-lg uppercase text-white cursor-pointer hover:opacity-95 disabled:opacity-80'>Create Listing</button> */}
 
       <div className='flex justify-between mt-5'>
-        <span className='text-red-700 hover:underline cursor-pointer'>Delete Account</span>
+        <span className='text-red-700 hover:underline cursor-pointer' onClick={handleDeleteUser}>Delete Account</span>
         <span className='text-red-700 hover:underline cursor-pointer'>Sign out</span>
       </div>
 
