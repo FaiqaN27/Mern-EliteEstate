@@ -82,7 +82,8 @@ const Profile = () => {
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
 
       <form onSubmit={handleUpdate} className='flex flex-col gap-5'>
-        <img src={currentUser.avatar} className='rounded-full w-25 h-25 object-cover cursor-pointer self-center mt-2' alt='profile' />
+
+        <img src={currentUser?.avatar} className='rounded-full w-25 h-25 object-cover cursor-pointer self-center mt-2' alt='profile' />
 
         <input type='text' className='rounded-lg p-3 bg-white focus:outline-none' placeholder='username' id='username' defaultValue={currentUser.username} onChange={handleChange} />
 

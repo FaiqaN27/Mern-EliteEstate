@@ -73,11 +73,13 @@ export const handleGoogleAuth = async (req, res, next) => {
 
       const name = req.body.username.split(" ").join("").toLowerCase() + Math.random().toString(36).slice(-4);
 
+      const googleAvatar = req.body.avatar?.replace('=s96-c', '=s400-c');
+
       const newUser = new User({
         username: name,
         email: req.body.email,
         password: hashedPassword,
-        avatar: req.body.profilePicture,
+        avatar: googleAvatar,
       })
 
       await newUser.save();
