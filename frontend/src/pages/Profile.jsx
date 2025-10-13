@@ -86,15 +86,15 @@ const Profile = () => {
 
         <img src={currentUser?.avatar} className='rounded-full w-25 h-25 object-cover cursor-pointer self-center mt-2' alt='profile' />
 
-        <input type='text' className='rounded-lg p-3 bg-white focus:outline-none' placeholder='username' id='username' defaultValue={currentUser.username} onChange={handleChange} />
+        <input type='text' className='rounded-lg p-3 bg-[#D6E6FF] focus:outline-none' placeholder='username' id='username' defaultValue={currentUser.username} onChange={handleChange} />
 
-        <input type='email' className='rounded-lg p-3 bg-white focus:outline-none' placeholder='email' id='email' defaultValue={currentUser.email} onChange={handleChange} />
+        <input type='email' className=' rounded-lg p-3 bg-[#D6E6FF] focus:outline-none' placeholder='email' id='email' defaultValue={currentUser.email} onChange={handleChange} />
 
-        <input type='password' className='rounded-lg p-3 bg-white focus:outline-none' id='password' placeholder='password' onChange={handleChange} />
+        <input type='password' className='rounded-lg p-3 bg-[#D6E6FF] focus:outline-none' id='password' placeholder='password' onChange={handleChange} />
 
-        <button disabled={loading} className='bg-slate-700 p-3 rounded-lg uppercase text-white cursor-pointer hover:opacity-95 disabled:opacity-80'>{loading ? 'Loading ...' : 'Update'}</button>
+        <button disabled={loading} className='bg-[#0D47C7] p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80'>{loading ? 'Loading ...' : 'Update'}</button>
 
-        <Link className='bg-green-700 p-3 rounded-lg uppercase text-center text-white cursor-pointer hover:opacity-95' to={'/create-listing'}> Create Listing</Link>
+        <Link className='bg-green-600 p-3 rounded-lg uppercase font-semibold text-center text-white cursor-pointer hover:opacity-90' to={'/create-listing'}> Create Listing</Link>
 
       </form>
 

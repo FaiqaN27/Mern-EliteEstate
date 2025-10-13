@@ -37,7 +37,7 @@ const OAuth = () => {
   }
 
   return (
-    <button onClick={handleGoogleSignIn} type="button" className="bg-red-700 p-3 text-white uppercase rounded-lg cursor-pointer hover:opacity-95 disabled:opacity-80">Continue with google</button>
+    <button onClick={handleGoogleSignIn} type="button" className="bg-red-600 p-3 text-white uppercase rounded-lg font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80">Continue with google</button>
   )
 }
 

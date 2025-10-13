@@ -12,7 +12,7 @@ const CreateListing = () => {
             id="name"
             placeholder="Name"
             type="text"
-            className="bg-white p-3 rounded-lg focus:outline-none"
+            className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none"
             maxLength="62"
             minLength="10"
             required
@@ -22,7 +22,7 @@ const CreateListing = () => {
             id="description"
             placeholder="Description"
             type="text"
-            className="bg-white p-3 rounded-lg focus:outline-none"
+            className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none"
             required
           />
 
@@ -30,7 +30,7 @@ const CreateListing = () => {
             id="address"
             placeholder="Address"
             type="text"
-            className="bg-white p-3 rounded-lg focus:outline-none"
+            className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none"
             required
           />
 
@@ -65,7 +65,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                className="p-3 bg-white rounded-lg focus:outline-none"
+                className="p-3 bg-[#D6E6FF] rounded-lg focus:outline-none"
                 id="bedrooms"
                 min="1"
                 max="10"
@@ -77,7 +77,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                className="p-3 bg-white rounded-lg focus:outline-none"
+                className="p-3 bg-[#D6E6FF] rounded-lg focus:outline-none"
                 id="bathrooms"
                 min="1"
                 max="10"
@@ -88,7 +88,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                className="p-3 bg-white rounded-lg focus:outline-none"
+                className="p-3 bg-[#D6E6FF] rounded-lg focus:outline-none"
                 min="1"
                 max="100000"
                 id="regularPrice"
@@ -102,7 +102,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                className="p-3 bg-white rounded-lg focus:outline-none"
+                className="p-3 bg-[#D6E6FF] rounded-lg focus:outline-none"
                 min="1"
                 max="100000"
                 id="discountedPrice"
@@ -120,25 +120,25 @@ const CreateListing = () => {
           <p className="font-semibold">
             Images:
             <span className="font-normal text-gray-600 ml-2">
-              The first image will be cover(max 6)
+              The first image will be cover (max 6)
             </span>
           </p>
           <div className="flex gap-4">
             <input
-              className="p-3 border border-white rounded-lg w-full cursor-pointer"
+              className="p-3 border border-[#D6E6FF] rounded-lg w-full cursor-pointer"
               type="file"
               id="images"
               accept="image/*"
               multiple
             />
 
-            <button
-              className="p-3 font-semibold text-[#1052E7] border border-[#1052E7] rounded-lg uppercase hover:shadow-lg disabled:opacity-80 hover:bg-[#1052E7]  hover:text-white">
+            <button type="button"
+              className="p-3 cursor-pointer border border-[#D6E6FF] rounded-lg hover:shadow-lg disabled:opacity-80 hover:bg-[#D6E6FF]">
               Upload
             </button>
           </div>
 
-          <button className="p-3 bg-[#1052E7] text-white rounded-lg uppercase cursor-pointer hover:opacity-95 disabled:opacity-80 font-semibold">Create Listing</button>
+          <button className='bg-[#0D47C7] p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80'>Create Listing</button>
         </div>
       </form>
     </main>
