@@ -80,7 +80,7 @@ const CreateListing = () => {
   const handleRemoveImage = async (index, public_id) => {
     try {
       await fetch('/api/listing/deleteImg', {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },

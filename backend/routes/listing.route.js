@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.post('/create', verifyToken, handleCreateListing);
 router.post('/uploadImg', verifyToken, upload.array('images', 6), handleUploadImage);
-router.delete('/deleteImg', verifyToken, handleDeleteImage)
+router.post('/deleteImg', verifyToken, handleDeleteImage)
 
 export default router;
