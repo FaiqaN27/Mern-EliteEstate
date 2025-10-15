@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const listingSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true,
   },
@@ -17,7 +17,7 @@ const listingSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  discountPrice: {
+  discountedPrice: {
     type: Number,
     required: true,
   },
@@ -45,10 +45,10 @@ const listingSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  imageUrls: {
-    type: Array,
-    required: true,
-  },
+  imageUrls: [{
+    url: String,
+    public_id: String
+  }],
   userRef: {
     type: String,
     required: true,
