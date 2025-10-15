@@ -26,6 +26,7 @@ const CreateListing = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   // Image Submit Handler
   const handleImageSubmit = async () => {
@@ -79,6 +80,7 @@ const CreateListing = () => {
 
   const handleRemoveImage = async (index, public_id) => {
     try {
+      setDeleting(true);
       await fetch('/api/listing/deleteImg', {
         method: 'POST',
         headers: {
@@ -91,6 +93,7 @@ const CreateListing = () => {
         ...formData,
         imageUrls: formData.imageUrls.filter((_, i) => i !== index),
       });
+      setDeleting(false);
     }
     catch (error) {
       console.error("Error deleting image:", error);
@@ -333,7 +336,7 @@ const CreateListing = () => {
             )
             )}
 
-          <button className="bg-[#0D47C7] p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80" disabled={loading || uploading}>
+          <button className="bg-[#0D47C7] p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80" disabled={loading || uploading || deleting}>
             {loading ? 'creating...' : 'Create Listing'}
           </button>
           {error && <p className="text-red-700 text-sm">{error}</p>}
