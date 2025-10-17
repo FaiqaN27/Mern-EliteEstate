@@ -95,16 +95,22 @@ const Profile = () => {
         <button disabled={loading} className='bg-[#0D47C7] p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80'>{loading ? 'Loading ...' : 'Update'}</button>
 
         <Link className='bg-green-600 p-3 rounded-lg uppercase font-semibold text-center text-white cursor-pointer hover:opacity-90' to={'/create-listing'}> Create Listing</Link>
-
       </form>
+
+      <p className='text-red-700 mt-5'>{error ? error : ''}</p>
+      <p className='text-green-700 mt-5'>{updateSuccess ? 'User Is Updated Successfully!' : ''}</p>
 
       <div className='flex justify-between mt-5'>
         <span className='text-red-700 hover:underline cursor-pointer' onClick={handleDeleteUser}>Delete Account</span>
         <span className='text-red-700 hover:underline cursor-pointer' onClick={handleUserSignout}>Sign out</span>
       </div>
 
-      <p className='text-red-700 mt-5'>{error ? error : ''}</p>
-      <p className='text-green-700 mt-5'>{updateSuccess ? 'User Is Updated Successfully!' : ''}</p>
+      <div className='flex justify-center'>
+        <Link to={'/show-listings'}>
+          <span className='text-green-700 hover:underline font-semibold mt-5'>Show Listings</span>
+        </Link>
+      </div>
+
     </div>
   )
 }
