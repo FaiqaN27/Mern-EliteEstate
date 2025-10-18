@@ -9,6 +9,7 @@ const ShowListings = () => {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
   const { currentUser } = useSelector(state => state.user);
 
   const fetchListings = async () => {
@@ -26,7 +27,7 @@ const ShowListings = () => {
     }
     catch (error) {
       setError(error.message)
-      setLoading(fasle);
+      setLoading(false);
     }
   }
 
@@ -34,19 +35,38 @@ const ShowListings = () => {
     fetchListings()
   }, [])
 
+  const handleDeleteListing = async (listingId) => {
+    try {
+      setDeletingId(listingId);
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: "DELETE",
+      })
+
+      const data = await res.json();
+      if (data.success === false) {
+        setError(data.message);
+        setDeletingId(null);
+        return;
+      }
+
+      setListings((prev) => prev.filter((listing) => listing._id !== listingId));
+
+      setLoading(false);
+    }
+    catch (error) {
+      setError(error.message);
+      setDeletingId(null);
+    }
+  }
+
   return (
     <div className="p-3 max-w-lg mx-auto mb-12">
-      <h1 className="font-semibold text-3xl text-center my-7">Your Listings</h1>
 
-      {loading && (
-        <div className="flex justify-center items-center h-screen">
-          <div className="w-12 h-12 border-4 border-[#0D47C7] border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
+      {listings && listings.length > 0 &&
+        <div className="flex flex-col gap-5">
+          <h1 className="font-semibold text-3xl text-center my-7">Your Listings</h1>
 
-      <div className="flex flex-col gap-5">
-        {listings && listings.length > 0 &&
-          listings.map((listing) => (
+          {listings.map((listing) => (
 
             <div className="border-3 border-[#D6E6FF] rounded-lg p-3 flex justify-between items-center gap-4" key={listing._id}>
               <Link to={`/listing/${listing._id}`}>
@@ -65,22 +85,44 @@ const ShowListings = () => {
                 >
                   <CiEdit size={22} />
                 </button>
+
                 <button
+                  disabled={deletingId === listing._id}
                   title="Delete"
-                  className="p-2 rounded-full bg-red-50 text-red-600
-                  cursor-pointer hover:bg-red-600 hover:text-white transition duration-200"
-                >
-                  <MdDeleteForever size={22} />
+                  className={`p-2 rounded-full bg-red-50 text-red-600
+                  cursor-pointer hover:bg-red-600 hover:text-white transition duration-200 ${deletingId === listing._id ? "opacity-50 cursor-not-allowed" : ''}`}
+                  onClick={() => handleDeleteListing(listing._id)}
+                >{
+                    deletingId === listing._id ? (
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    ) : <MdDeleteForever size={22} />
+                  }
                 </button>
               </div>
             </div>
-          ))
-        }
-      </div>
+          ))}
+        </div>
+      }
 
 
+      {/* Global Loader */}
+      {loading && (
+        <div className="flex justify-center items-center h-screen">
+          <div className="w-12 h-12 border-4 border-[#0D47C7] border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
 
-    </div >
+      {!loading && listings.length === 0 && (
+        <div className="flex justify-center items-center h-screen">
+          <p className="text-center text-3xl text-[#0D47C7] mt-10">No listings found...</p>
+        </div>
+      )}
+
+      {error && (
+        <p className="text-center text-2xl text-red-600 mt-7">{error}</p>
+      )}
+
+    </div>
   )
 }
 
