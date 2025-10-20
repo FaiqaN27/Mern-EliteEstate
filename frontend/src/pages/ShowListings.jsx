@@ -79,12 +79,13 @@ const ShowListings = () => {
               </Link>
 
               <div className="flex items-center gap-3">
-                <button
-                  title="Edit"
-                  className="p-2 rounded-full bg-blue-50  cursor-pointer  text-[#0D47C7] hover:bg-[#0D47C7] hover:text-white transition duration-200"
-                >
-                  <CiEdit size={22} />
-                </button>
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button
+                    title="Edit"
+                    className="p-2 rounded-full bg-blue-50  cursor-pointer  text-[#0D47C7] hover:bg-[#0D47C7] hover:text-white transition duration-200"
+                  >
+                    <CiEdit size={22} />
+                  </button></Link>
 
                 <button
                   disabled={deletingId === listing._id}
@@ -106,23 +107,29 @@ const ShowListings = () => {
 
 
       {/* Global Loader */}
-      {loading && (
-        <div className="flex justify-center items-center h-screen">
-          <div className="w-12 h-12 border-4 border-[#0D47C7] border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
+      {
+        loading && (
+          <div className="flex justify-center items-center h-screen">
+            <div className="w-12 h-12 border-4 border-[#0D47C7] border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )
+      }
 
-      {!loading && listings.length === 0 && (
-        <div className="flex justify-center items-center h-screen">
-          <p className="text-center text-3xl text-[#0D47C7] mt-10">No listings found...</p>
-        </div>
-      )}
+      {
+        !loading && listings.length === 0 && (
+          <div className="flex justify-center items-center h-screen">
+            <p className="text-center text-3xl text-[#0D47C7] mt-10">No listings found...</p>
+          </div>
+        )
+      }
 
-      {error && (
-        <p className="text-center text-2xl text-red-600 mt-7">{error}</p>
-      )}
+      {
+        error && (
+          <p className="text-center text-2xl text-red-600 mt-7">{error}</p>
+        )
+      }
 
-    </div>
+    </div >
   )
 }
 

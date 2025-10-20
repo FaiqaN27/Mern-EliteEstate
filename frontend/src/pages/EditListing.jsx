@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const CreateListing = () => {
+const EditListing = () => {
+  const params = useParams();
   const navigate = useNavigate();
   const { currentUser } = useSelector(state => state.user);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [files, setFiles] = useState([])
+  const [imgUploadError, setImgUploadError] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [formData, setFormData] = useState({
     imageUrls: [],
     title: '',
@@ -19,32 +26,42 @@ const CreateListing = () => {
     offer: false,
     parking: false,
     furnished: false
-  });
+  })
 
-  const [files, setFiles] = useState([]);
-  const [imgUploadError, setImgUploadError] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [deleting, setDeleting] = useState(false);
+  useEffect(() => {
+    const fetchListing = async () => {
+      const listingId = params.listingId;
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setFormData(data);
+    }
 
-  // Image Submit Handler
+    fetchListing();
+  }, [])
+
   const handleImageSubmit = async () => {
     if (files.length === 0) {
-      return setImgUploadError("Please select at least one image");
+      return setImgUploadError("Please select at least 1 image");
     }
+
     if (files.length + formData.imageUrls.length > 6) {
       return setImgUploadError("You can only upload 6 images per listing");
     }
+
     setUploading(true);
     setImgUploadError(false);
-
     try {
+      // Upload all selected files simultaneously
       const uploadedImages = await Promise.all([...files].map((file) => storeImage(file)));
 
+      // Add uploaded image data (url + public_id) to existing form data
       setFormData({
         ...formData,
-        imageUrls: [...formData.imageUrls, ...uploadedImages],
+        imageUrls: [...formData.imageUrls, ...uploadedImages]
       });
 
       setFiles([]);
@@ -54,12 +71,11 @@ const CreateListing = () => {
       setUploading(false);
 
     }
-    catch (err) {
+    catch (error) {
       setImgUploadError("Image upload failed (max 2MB per image)");
     }
   }
 
-  // Storing images in cloudinary
   const storeImage = async (file) => {
     const formData = new FormData();
     formData.append("images", file);
@@ -67,16 +83,19 @@ const CreateListing = () => {
     const res = await fetch('/api/listing/uploadImg', {
       method: 'POST',
       body: formData,
-    });
+    })
 
-    if (!res.ok) throw new Error("Upload Failed");
     const data = await res.json();
+    if (data.success === false) {
+      setImgUploadError(data.message);
+      setUploading(false);
+      return;
+    }
     return {
       url: data.images[0].url,
       public_id: data.images[0].public_id,
-    };
-  };
-
+    }
+  }
 
   const handleRemoveImage = async (index, public_id) => {
     try {
@@ -102,7 +121,7 @@ const CreateListing = () => {
 
   const handleChange = (e) => {
     if (e.target.id === 'rent' || e.target.id === 'sale') {
-      setFormData({ ...formData, type: e.target.id })
+      setFormData({ ...formData, type: e.target.id });
     }
     else if (e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer') {
       setFormData({ ...formData, [e.target.id]: e.target.checked })
@@ -112,48 +131,53 @@ const CreateListing = () => {
     }
   }
 
-  const handleListingSubmit = async (e) => {
+  const handleListingUpdate = async (e) => {
     e.preventDefault();
     try {
-
       if (formData.imageUrls.length < 1) {
         return setError('You must upload atleast 1 image');
       }
 
       if (+formData.regularPrice < +formData.discountedPrice) {
-        return setError('Discounted Price should be lower than regular price');
+        return setError('Discounted Price should be lower than regular price')
       }
 
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/listing/create', {
-        method: 'POST',
+      const res = await fetch(`/api/listing/update/${params.listingId}`, {
+        method: 'PUT',
         headers: {
           'Content-type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, userRef: currentUser._id }),
-      });
+        body: JSON.stringify({
+          ...formData,
+          userRef: currentUser._id
+        })
+      })
 
       const data = await res.json();
       setLoading(false);
+
       if (data.success === false) {
         setError(data.message);
         return;
       }
+
       navigate(`/listing/${data._id}`);
     }
     catch (error) {
       setError(error.message);
+      setLoading(false);
     }
   }
 
   return (
     <main className="max-w-4xl mx-auto p-3 mb-12">
       <h1 className="text-3xl font-semibold text-center my-7">
-        Create Listing
+        Update Listing
       </h1>
 
-      <form className="flex flex-col sm:flex-row gap-4" onSubmit={handleListingSubmit}>
+      <form className="flex flex-col sm:flex-row gap-4" onSubmit={handleListingUpdate}>
         <div className="flex flex-col gap-5 flex-1">
           <input
             id="title"
@@ -338,13 +362,16 @@ const CreateListing = () => {
             )}
 
           <button className="bg-[#0D47C7] p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80" disabled={loading || uploading || deleting}>
-            {loading ? 'creating...' : 'Create Listing'}
+            {loading ? 'updating...' : 'Update Listing'}
           </button>
+
           {error && <p className="text-red-700 text-sm">{error}</p>}
+
         </div>
       </form>
+
     </main>
   );
-};
+}
 
-export default CreateListing;
+export default EditListing
