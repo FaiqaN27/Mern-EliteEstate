@@ -105,7 +105,7 @@ const Profile = () => {
         <span className='text-red-700 hover:underline cursor-pointer' onClick={handleUserSignout}>Sign out</span>
       </div>
 
-      <div className='flex justify-center'>
+      <div className='flex justify-center mt-5'>
         <Link to={'/show-listings'}>
           <span className='text-green-700 hover:underline font-semibold mt-5'>Show Listings</span>
         </Link>
