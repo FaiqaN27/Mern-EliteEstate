@@ -123,7 +123,12 @@ export const handleGetSearchListings = async (req, res, next) => {
     const order = req.query.order || 'desc';
 
     const listings = await Listing.find({
-      title: { $regex: searchTerm, $options: 'i' },
+      title: {
+        //regex => used to find partial matches in strings
+        $regex: searchTerm,
+        //means case insensitive (e.g., “villa” matches “Villa”, “VILLA”, etc).
+        $options: 'i'
+      },
       offer,
       furnished,
       parking,
