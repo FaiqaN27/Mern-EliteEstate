@@ -12,7 +12,7 @@ const Header = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //creates urlSearchParams obj
+    //creates urlParams obj
     const urlParams = new URLSearchParams(window.location.search);
 
     urlParams.set('searchTerm', searchTerm);
