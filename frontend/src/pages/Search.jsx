@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ListingCard from "../components/ListingCard";
 
 const Search = () => {
+  const [showMore, setShowMore] = useState(false);
   const navigate = useNavigate();
   const [sidebarData, setSidebarData] = useState({
     searchTerm: "",
@@ -50,6 +51,7 @@ const Search = () => {
 
     const fetchListings = async () => {
       try {
+        setShowMore(false);
         setLoading(true);
         const searchQuery = urlParams.toString();
         const res = await fetch(`/api/listing/get?${searchQuery}`);
@@ -59,6 +61,12 @@ const Search = () => {
           setError(data.message);
           setLoading(false);
           return;
+        }
+
+        if (data.length > 8) {
+          setShowMore(true);
+        } else {
+          setShowMore(false);
         }
         setListings(data);
         setLoading(false);
@@ -118,6 +126,22 @@ const Search = () => {
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
+
+  const handleShowMoreClick = async () => {
+    const numberOfListings = listings.length;
+    const startIndex = numberOfListings;
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('startIndex', startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const data = await res.json();
+
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+
+    setListings([...listings, ...data]);
+  }
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -240,6 +264,14 @@ const Search = () => {
         </h1>
 
         <div className="p-7 flex flex-wrap gap-4">
+          {
+            loading && (
+              <div className="flex justify-center items-center h-[60vh] w-full">
+                <div className="w-12 h-12 border-4 border-[#0D47C7] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )
+          }
+
           {!loading && !error && listings.length === 0 && (
             <p className="text-xl text-slate-700">No Listing found!</p>
           )}
@@ -247,13 +279,10 @@ const Search = () => {
           {!loading && listings && listings.map((listing) => (<ListingCard listing={listing} key={listing._id} />))}
         </div>
 
-        {
-          loading && (
-            <div className="flex justify-center items-center h-[60vh]">
-              <div className="w-12 h-12 border-4 border-[#0D47C7] border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          )
-        }
+
+        {showMore && (
+          <button className="text-green-700 hover:underline text-center w-full pb-7 cursor-pointer" onClick={handleShowMoreClick}>Show more</button>
+        )}
 
         {
           error && (
@@ -263,7 +292,7 @@ const Search = () => {
       </div>
 
 
-    </div>
+    </div >
   );
 };
 
