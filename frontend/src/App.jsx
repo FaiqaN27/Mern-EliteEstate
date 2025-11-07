@@ -11,6 +11,7 @@ import ShowListings from './pages/ShowListings';
 import EditListing from './pages/EditListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           </Route>
 
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )
