@@ -116,7 +116,7 @@ const ShowListings = () => {
       }
 
       {
-        !loading && listings.length === 0 && (
+       !error && !loading && listings.length === 0 && (
           <div className="flex justify-center items-center h-screen">
             <p className="text-center text-3xl text-[#0D47C7] mt-10">No listings found...</p>
           </div>
