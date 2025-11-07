@@ -31,7 +31,7 @@ const Header = () => {
   }, [location.search]);
 
   return (
-    <header>
+    <header className='shadow-lg'>
       <div className="flex items-center justify-between max-w-6xl mx-auto p-3">
         <Link to='/'>
           <h1 className="font-bold text-sm sm:text-3xl flex flex-wrap">
