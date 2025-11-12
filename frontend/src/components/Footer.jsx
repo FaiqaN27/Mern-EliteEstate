@@ -53,12 +53,6 @@ const Footer = () => {
             About
           </Link>
           <Link
-            to="/service"
-            className="text-sm hover:text-primary hover:underline"
-          >
-            Service
-          </Link>
-          <Link
             to="/contact"
             className="text-sm hover:text-primary hover:underline"
           >
