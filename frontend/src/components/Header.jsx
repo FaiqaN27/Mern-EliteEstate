@@ -56,12 +56,12 @@ const Header = () => {
           </Link>
 
           <Link to='/about'>
-            <li className='hidden sm:inline text-secondary font-semibold  hover:underline hover:text-primary'>About</li>
+            <li className='hidden sm:inline text-secondary font-semibold hover:underline hover:text-primary'>About</li>
           </Link>
 
           <Link to='/profile'>
 
-            {currentUser ? <img src={currentUser.avatar} className='rounded-full w-10 h-10 object-cover' /> : <li className=' text-slate-700 hover:underline'>Sign In</li>
+            {currentUser ? <img src={currentUser.avatar} className='rounded-full w-10 h-10 object-cover' /> : <li className='font-semibold hover:underline hover:text-primary'>Sign In</li>
             }
 
           </Link>
