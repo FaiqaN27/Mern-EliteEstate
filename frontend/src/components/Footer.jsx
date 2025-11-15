@@ -9,7 +9,7 @@ import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#EAEAF4] p-5 mt-4">
+    <footer className="bg-light p-5 mt-4">
       <div className="flex gap-10 flex-col md:flex-row items-start justify-between max-w-6xl mx-auto p-3">
         <div className="flex flex-col gap-5 w-full md:w-[45%]">
           <Link to="/">
