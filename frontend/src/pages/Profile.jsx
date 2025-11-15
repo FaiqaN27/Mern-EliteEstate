@@ -86,28 +86,28 @@ const Profile = () => {
 
         <img src={currentUser?.avatar} className='rounded-full w-25 h-25 object-cover cursor-pointer self-center mt-2' alt='profile' />
 
-        <input type='text' className='rounded-lg p-3 bg-[#D6E6FF] focus:outline-none' placeholder='username' id='username' defaultValue={currentUser.username} onChange={handleChange} />
+        <input type='text' className='rounded-lg p-3 bg-background focus:outline-none' placeholder='username' id='username' defaultValue={currentUser.username} onChange={handleChange} />
 
-        <input type='email' className=' rounded-lg p-3 bg-[#D6E6FF] focus:outline-none' placeholder='email' id='email' defaultValue={currentUser.email} onChange={handleChange} />
+        <input type='email' className=' rounded-lg p-3 bg-background focus:outline-none' placeholder='email' id='email' defaultValue={currentUser.email} onChange={handleChange} />
 
-        <input type='password' className='rounded-lg p-3 bg-[#D6E6FF] focus:outline-none' id='password' placeholder='password' onChange={handleChange} />
+        <input type='password' className='rounded-lg p-3 bg-background focus:outline-none' id='password' placeholder='password' onChange={handleChange} />
 
-        <button disabled={loading} className='bg-[#0D47C7] p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80'>{loading ? 'Loading ...' : 'Update'}</button>
+        <button disabled={loading} className='bg-primary p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80'>{loading ? 'Loading ...' : 'Update'}</button>
 
-        <Link className='bg-green-600 p-3 rounded-lg uppercase font-semibold text-center text-white cursor-pointer hover:opacity-90' to={'/create-listing'}> Create Listing</Link>
+        <Link className='bg-action p-3 rounded-lg uppercase font-semibold text-center text-white cursor-pointer hover:opacity-90' to={'/create-listing'}> Create Listing</Link>
       </form>
 
-      <p className='text-red-700 mt-5'>{error ? error : ''}</p>
-      <p className='text-green-700 mt-5'>{updateSuccess ? 'User Is Updated Successfully!' : ''}</p>
+      <p className='text-danger mt-5'>{error ? error : ''}</p>
+      <p className='text-action mt-5'>{updateSuccess ? 'User Is Updated Successfully!' : ''}</p>
 
       <div className='flex justify-between mt-5'>
-        <span className='text-red-700 hover:underline cursor-pointer' onClick={handleDeleteUser}>Delete Account</span>
-        <span className='text-red-700 hover:underline cursor-pointer' onClick={handleUserSignout}>Sign out</span>
+        <span className='text-danger hover:underline cursor-pointer' onClick={handleDeleteUser}>Delete Account</span>
+        <span className='text-danger hover:underline cursor-pointer' onClick={handleUserSignout}>Sign out</span>
       </div>
 
       <div className='flex justify-center mt-5'>
         <Link to={'/show-listings'}>
-          <span className='text-green-700 hover:underline font-semibold mt-5'>Show Listings</span>
+          <span className='text-action hover:underline font-semibold mt-5'>Show Listings</span>
         </Link>
       </div>
 

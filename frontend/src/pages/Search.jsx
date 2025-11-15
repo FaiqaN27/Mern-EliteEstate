@@ -146,7 +146,7 @@ const Search = () => {
   return (
     <div className="flex flex-col md:flex-row">
 
-      <div className="p-7 border-b-2 border-[#D6E6FF] md:border-r-2 md:min-h-screen">
+      <div className="p-7 border-b-2 border-background md:border-r-2 md:min-h-screen">
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="flex items-center gap-2">
             <label className="font-semibold whitespace-nowrap">
@@ -157,7 +157,7 @@ const Search = () => {
               type="text"
               id="searchTerm"
               placeholder="search ..."
-              className="bg-[#D6E6FF] p-3 rounded-lg w-full focus:outline-none"
+              className="bg-background p-3 rounded-lg w-full focus:outline-none"
               value={sidebarData.searchTerm}
               onChange={handleChange}
             />
@@ -241,7 +241,7 @@ const Search = () => {
             <label className="font-semibold">Sort: </label>
             <select
               id="sort_order"
-              className="w-full bg-[#D6E6FF] p-3 rounded-lg focus:outline-none"
+              className="w-full bg-background p-3 rounded-lg focus:outline-none"
               onChange={handleChange}
               defaultValue={"createdAt_desc"}
             >
@@ -252,14 +252,14 @@ const Search = () => {
             </select>
           </div>
 
-          <button className="w-full bg-[#0D47C7] uppercase font-semibold text-white p-3 rounded-lg cursor-pointer hover:opacity-90">
+          <button className="w-full bg-primary uppercase font-semibold text-white p-3 rounded-lg cursor-pointer hover:opacity-90">
             Search
           </button>
         </form>
       </div>
 
       <div className="flex-1">
-        <h1 className="text-3xl font-semibold p-3 border-[#D6E6FF] border-b-2 mt-5">
+        <h1 className="text-3xl font-semibold p-3 border-background border-b-2 mt-5">
           Listing results:
         </h1>
 
@@ -267,7 +267,7 @@ const Search = () => {
           {
             loading && (
               <div className="flex justify-center items-center h-[60vh] w-full">
-                <div className="w-12 h-12 border-4 border-[#0D47C7] border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
               </div>
             )
           }
@@ -281,12 +281,12 @@ const Search = () => {
 
 
         {showMore && (
-          <button className="text-green-700 hover:underline text-center w-full pb-7 cursor-pointer" onClick={handleShowMoreClick}>Show more</button>
+          <button className="text-action font-semibold hover:underline text-center w-full pb-7 cursor-pointer" onClick={handleShowMoreClick}>Show more</button>
         )}
 
         {
           error && (
-            <p className="text-center text-2xl text-red-600 mt-7">{error}</p>
+            <p className="text-center text-2xl text-danger mt-7">{error}</p>
           )
         }
       </div>

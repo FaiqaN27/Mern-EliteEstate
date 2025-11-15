@@ -159,7 +159,7 @@ const CreateListing = () => {
             id="title"
             placeholder="Title"
             type="text"
-            className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none"
+            className="bg-background p-3 rounded-lg focus:outline-none"
             maxLength="62"
             minLength="10"
             required
@@ -171,7 +171,7 @@ const CreateListing = () => {
             id="description"
             placeholder="Description"
             type="text"
-            className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none"
+            className="bg-background p-3 rounded-lg focus:outline-none"
             required
             onChange={handleChange}
             value={formData.description}
@@ -181,7 +181,7 @@ const CreateListing = () => {
             id="address"
             placeholder="Address"
             type="text"
-            className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none"
+            className="bg-background p-3 rounded-lg focus:outline-none"
             required
             onChange={handleChange}
             value={formData.address}
@@ -222,7 +222,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                className="p-3 bg-[#D6E6FF] rounded-lg focus:outline-none"
+                className="p-3 bg-background rounded-lg focus:outline-none"
                 id="bedrooms"
                 min="1"
                 max="10"
@@ -236,7 +236,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                className="p-3 bg-[#D6E6FF] rounded-lg focus:outline-none"
+                className="p-3 bg-background rounded-lg focus:outline-none"
                 id="bathrooms"
                 min="1"
                 max="10"
@@ -249,7 +249,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                className="p-3 bg-[#D6E6FF] rounded-lg focus:outline-none"
+                className="p-3 bg-background rounded-lg focus:outline-none"
                 min="50"
                 max="10000000"
                 id="regularPrice"
@@ -268,7 +268,7 @@ const CreateListing = () => {
               (<div className="flex items-center gap-2">
                 <input
                   type="number"
-                  className="p-3 bg-[#D6E6FF] rounded-lg focus:outline-none"
+                  className="p-3 bg-background rounded-lg focus:outline-none"
                   min="0"
                   max="10000000"
                   id="discountedPrice"
@@ -289,13 +289,13 @@ const CreateListing = () => {
         <div className="flex flex-col flex-1 gap-4">
           <p className="font-semibold">
             Images:
-            <span className="font-normal text-gray-600 ml-2">
+            <span className="font-normal text-action ml-2">
               The first image will be cover (max 6)
             </span>
           </p>
           <div className="flex gap-4">
             <input
-              className="p-3 border border-[#D6E6FF] rounded-lg w-full cursor-pointer"
+              className="p-3 border border-background rounded-lg w-full cursor-pointer"
               type="file"
               id="images"
               accept="image/*"
@@ -306,21 +306,21 @@ const CreateListing = () => {
             <button
               disabled={uploading}
               type="button"
-              className="p-3 cursor-pointer border-3 border-[#D6E6FF] rounded-lg hover:shadow-lg disabled:opacity-80 hover:bg-[#D6E6FF]"
+              className="p-3 cursor-pointer border-3 border-background rounded-lg hover:shadow-lg disabled:opacity-80 hover:bg-background"
               onClick={handleImageSubmit}
             >
               {uploading ? "Uploading ..." : "Upload"}
             </button>
           </div>
 
-          <p className="text-red-700 text-sm">
+          <p className="text-danger text-sm">
             {imgUploadError && imgUploadError}
           </p>
 
           {formData.imageUrls?.length > 0 &&
             formData.imageUrls.map((image, index) => (
               <div
-                className="flex justify-between p-3 border border-[#D6E6FF] items-center"
+                className="flex justify-between p-3 border border-background items-center"
                 key={index}
               >
                 <img
@@ -331,7 +331,7 @@ const CreateListing = () => {
                 <button
                   type="button"
                   onClick={() => handleRemoveImage(index, image.public_id)}
-                  className="text-red-700 p-3 rounded-lg uppercase hover:opacity-80"
+                  className="text-danger p-3 rounded-lg uppercase hover:opacity-80"
                 >
                   Delete
                 </button>
@@ -339,10 +339,10 @@ const CreateListing = () => {
             )
             )}
 
-          <button className="bg-[#0D47C7] p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80" disabled={loading || uploading || deleting}>
+          <button className="bg-primary p-3 rounded-lg uppercase text-white font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80" disabled={loading || uploading || deleting}>
             {loading ? 'creating...' : 'Create Listing'}
           </button>
-          {error && <p className="text-red-700 text-sm">{error}</p>}
+          {error && <p className="text-danger text-sm">{error}</p>}
         </div>
       </form>
     </main>

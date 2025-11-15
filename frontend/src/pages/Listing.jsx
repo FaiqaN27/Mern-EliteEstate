@@ -61,9 +61,9 @@ const Listing = () => {
             }
           </Swiper>
 
-          <div className='fixed top-[15%] right-[3%] z-10 rounded-full w-12 h-12 flex justify-center items-center bg-[#D6E6FF] cursor-pointer'>
+          <div className='fixed top-[15%] right-[3%] z-10 rounded-full w-12 h-12 flex justify-center items-center bg-background cursor-pointer'>
             <FaShare
-              className='text-[#0D47C7]'
+              className='text-primary'
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
                 setCopied(true);
@@ -75,7 +75,7 @@ const Listing = () => {
           </div>
 
           {copied && (
-            <p className='fixed top-[23%] right-[5%] z-20 bg-[#0D47C7] text-white text-sm px-3 py-1 rounded-md shadow-md'>
+            <p className='fixed top-[23%] right-[5%] z-20 bg-primary text-white text-sm px-3 py-1 rounded-md shadow-md'>
               Link copied!
             </p>
           )}
@@ -89,26 +89,26 @@ const Listing = () => {
               {listing.type === 'rent' && ' / month'}
             </p>
             <p className='flex items-center gap-2 my-2 text-sm'>
-              <FaMapMarkerAlt className='text-[#0D47C7]' size={22} />
+              <FaMapMarkerAlt className='text-primary' size={22} />
               {listing.address}
             </p>
 
             <div className='flex gap-4'>
-              <p className='bg-red-700 w-full max-w-[200px] text-white text-center p-1 rounded-md font-semibold'>
+              <p className='bg-danger w-full max-w-[200px] text-white text-center p-1 rounded-md font-semibold'>
                 {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
               </p>
               {
                 listing.offer && (
-                  <p className='bg-green-600 w-full max-w-[200px] text-white text-center p-1 rounded-md font-semibold'>$ {(listing.regularPrice - listing.discountedPrice).toLocaleString('en-US')} OFF</p>
+                  <p className='bg-action w-full max-w-[200px] text-white text-center p-1 rounded-md font-semibold'>$ {(listing.regularPrice - listing.discountedPrice).toLocaleString('en-US')} OFF</p>
                 )
               }
             </div>
 
-            <p className='text-gray-800 leading-relaxed'>
-              <span className=' text-black font-bold'>Description - </span>
+            <p className='text-secondary leading-relaxed'>
+              <span className='text-black font-bold'>Description - </span>
               {listing.description}</p>
 
-            <ul className='flex flex-wrap items-center gap-4 font-semibold sm:gap-6 text-[#0D47C7] text-sm'>
+            <ul className='flex flex-wrap items-center gap-4 font-semibold sm:gap-6 text-primary text-sm'>
 
               <li className='flex items-center gap-1 whitespace-nowrap'>
                 <FaBed size={18} />
@@ -132,7 +132,7 @@ const Listing = () => {
             </ul>
 
             {currentUser && listing.userRef !== currentUser._id && !contact && (
-              <button className='bg-[#0D47C7] rounded-lg uppercase text-white font-semibold p-3 hover:opacity-90 cursor-pointer mt-5' onClick={() => setContact(true)}>Contact LandLord</button>
+              <button className='bg-primary rounded-lg uppercase text-white font-semibold p-3 hover:opacity-90 cursor-pointer mt-5' onClick={() => setContact(true)}>Contact LandLord</button>
             )}
 
             {
@@ -147,13 +147,13 @@ const Listing = () => {
       {
         loading && (
           <div className="flex justify-center items-center h-screen">
-            <div className="w-12 h-12 border-4 border-[#0D47C7] border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
           </div>
         )
       }
       {
         error && (
-          <p className="text-center text-2xl text-red-600 mt-7">Something went wrong</p>
+          <p className="text-center text-2xl text-danger mt-7">Something went wrong</p>
         )
       }
     </main >

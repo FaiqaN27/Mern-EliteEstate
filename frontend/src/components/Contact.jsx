@@ -28,7 +28,7 @@ const Contact = ({ listing }) => {
       {landlord && (
         <div className="flex flex-col gap-5 mt-4">
           <p>
-            Contact <span className="font-semibold">{landlord.username}</span>{" "}
+            Contact <span className="font-semibold text-primary capitalize">{landlord.username}</span>{" "}
             for{" "}
             <span className="font-semibold">{listing.title.toLowerCase()}</span>
           </p>
@@ -40,12 +40,12 @@ const Contact = ({ listing }) => {
             value={message}
             onChange={handleChange}
             placeholder="Enter your message here ..."
-            className="bg-[#D6E6FF] w-full p-3 rounded-lg focus:outline-none"
+            className="bg-background w-full p-3 rounded-lg focus:outline-none"
           ></textarea>
 
           <Link
             to={`mailto:${landlord.email}?subject=${encodeURIComponent(`Regarding ${listing.title}`)}&body= ${encodeURIComponent(message)}`}
-            className="bg-[#0D47C7] p-3 uppercase rounded-lg text-white font-semibold text-center hover:opacity-90"
+            className="bg-primary p-3 uppercase rounded-lg text-white font-semibold text-center hover:opacity-90"
           >
             Send Message
           </Link>

@@ -46,20 +46,20 @@ const SignIn = () => {
       <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <input type="email" placeholder="Email" id="email" className="bg-[#D6E6FF] rounded-lg p-3 focus:outline-none" onChange={handleChange} />
+        <input type="email" placeholder="Email" id="email" className="bg-background rounded-lg p-3 focus:outline-none" onChange={handleChange} />
 
-        <input type="password" placeholder="Password" id="password" className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none" onChange={handleChange} />
+        <input type="password" placeholder="Password" id="password" className="bg-background p-3 rounded-lg focus:outline-none" onChange={handleChange} />
 
-        <button disabled={loading} className="bg-[#0D47C7] font-semibold p-3 rounded-lg text-white uppercase cursor-pointer hover:opacity-90 disabled:opacity-80">{loading ? 'Loading...' : 'Sign In'}</button>
+        <button disabled={loading} className="bg-primary font-semibold p-3 rounded-lg text-white uppercase cursor-pointer hover:opacity-90 disabled:opacity-80">{loading ? 'Loading...' : 'Sign In'}</button>
         <OAuth />
       </form>
 
       <div className="flex gap-2 mt-5">
         <p>Dont have an account?</p>
-        <Link to={'/sign-up'}><span className="text-[#0D47C7] font-semibold hover:underline">Sign up</span></Link>
+        <Link to={'/sign-up'}><span className="text-primary font-semibold hover:underline">Sign up</span></Link>
       </div>
 
-      {error && <p className="text-red-700 mt-5">{error}</p>}
+      {error && <p className="text-danger mt-5">{error}</p>}
     </div>
   )
 }

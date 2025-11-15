@@ -47,21 +47,21 @@ const SignUp = () => {
       <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
 
       <form className="flex flex-col gap-6" onSubmit={handleForm}>
-        <input className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none" type="text" placeholder="Username" id="username" onChange={handleChange} />
+        <input className="bg-background p-3 rounded-lg focus:outline-none" type="text" placeholder="Username" id="username" onChange={handleChange} />
 
-        <input type="email" placeholder="Email" id="email" className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none" onChange={handleChange} />
+        <input type="email" placeholder="Email" id="email" className="bg-background p-3 rounded-lg focus:outline-none" onChange={handleChange} />
 
-        <input type="password" placeholder="Password" className="bg-[#D6E6FF] p-3 rounded-lg focus:outline-none" onChange={handleChange} id='password' />
+        <input type="password" placeholder="Password" className="bg-background p-3 rounded-lg focus:outline-none" onChange={handleChange} id='password' />
 
-        <button disabled={loading} className="uppercase bg-[#0D47C7] text-white font-semibold p-3 rounded-lg hover:opacity-90 disabled:opacity-80 cursor-pointer">{loading ? 'Loading ...' : 'Sign Up'}</button>
+        <button disabled={loading} className="uppercase bg-primary text-white font-semibold p-3 rounded-lg hover:opacity-90 disabled:opacity-80 cursor-pointer">{loading ? 'Loading ...' : 'Sign Up'}</button>
         <OAuth />
       </form>
 
       <div className='flex gap-2 mt-5'>
         <p>Have an account?</p>
-        <Link to={'/sign-in'}><span className='text-[#0D47C7] hover:underline font-semibold'>Sign in</span></Link>
+        <Link to={'/sign-in'}><span className='text-primary hover:underline font-semibold'>Sign in</span></Link>
       </div>
-      {error && <p className='text-red-700 mt-5'>{error}</p>}
+      {error && <p className='text-danger mt-5'>{error}</p>}
     </div>
   )
 }
