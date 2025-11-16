@@ -3,7 +3,7 @@ import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 const GetInTouch = () => {
   return (
     <div>
-      <section className="p-4 max-w-lg md:max-w-5xl mx-auto my-7">
+      <section className="p-4 max-w-7xl mx-auto my-7">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div>
             <h2 className="text-secondary font-semibold text-2xl md:text-4xl my-5">
