@@ -43,7 +43,7 @@
 1. Clone the repository:
 
 ```bash
-git clone <>
+git clone <https://github.com/FaiqaN27/Mern-EliteEstate>
 cd EliteEstate/backend
 ```
 
