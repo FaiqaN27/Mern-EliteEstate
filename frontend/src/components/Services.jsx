@@ -32,23 +32,22 @@ const Services = () => {
   ];
 
   return (
-    <section className="flex flex-col gap-3 my-8 mx-4">
-      <h1 className="text-secondary text-2xl md:text-4xl text-center font-semibold">
+    <section className="max-w-7xl p-3 flex flex-col gap-3 my-10 mx-auto">
+      <h1 className="text-secondary text-2xl md:text-4xl font-semibold">
         Our Services
       </h1>
-      <p className="text-gray-600 text-sm md:text-lg text-center font-light">
-        Enhance your property listings with accurate and
-        <br /> engaging subtitles.{" "}
+      <p className="text-gray-500 text-sm md:text-base mb-4">
+        Enhance your property listings with accurate and engaging subtitles.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 max-w-4xl mx-auto">
+      <div className="flex flex-col lg:flex-row gap-5 mx-auto">
         {services.map((service, i) => {
           const isActive = i === activeIdx;
           return (
             <div
               key={i}
               onClick={() => setActiveIdx(i)}
-              className={`p-7 rounded-xl transition-all duration-300 flex gap-6 justify-center items-center cursor-pointer  ${
+              className={`p-7 rounded-xl transition-all duration-300 flex flex-col gap-4 justify-center items-center cursor-pointer  ${
                 isActive ? "bg-primary" : "bg-light"
               }`}
             >
@@ -58,23 +57,21 @@ const Services = () => {
                 {service.icon}
               </div>
 
-              <div className="flex flex-col gap-3">
-                <h3
-                  className={`text-lg font-semibold ${
-                    isActive ? "text-white" : "text-secondary"
-                  }`}
-                >
-                  {service.title}
-                </h3>
+              <h3
+                className={`text-lg font-semibold ${
+                  isActive ? "text-white" : "text-secondary"
+                }`}
+              >
+                {service.title}
+              </h3>
 
-                <p
-                  className={`text-sm ${
-                    isActive ? "text-light" : "text-gray-500"
-                  }`}
-                >
-                  {service.description}
-                </p>
-              </div>
+              <p
+                className={`text-sm ${
+                  isActive ? "text-light" : "text-gray-500"
+                }`}
+              >
+                {service.description}
+              </p>
             </div>
           );
         })}
