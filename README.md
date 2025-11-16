@@ -104,9 +104,13 @@ npm run dev
 ## 🖼 Screenshots / Demo
 
 ![Home Page](frontend/src/assets/ss0.PNG)
+
 ![Search Page](frontend/src/assets/ss1.PNG)
+
 ![Listing Page](frontend/src/assets/ss2.PNG)
+
 ![SignIn Page](frontend/src/assets/ss3.PNG)
+
 ![Contact Page](frontend/src/assets/ss4.PNG)
 
 ---
