@@ -40,8 +40,8 @@ const SignIn = () => {
       }
       dispatch(signInSuccess(data));
       navigate("/");
-    } catch (err) {
-      dispatch(signInFailure(err.message));
+    } catch (error) {
+      dispatch(signInFailure(error.message));
     }
   };
 
@@ -84,7 +84,7 @@ const SignIn = () => {
         </Link>
       </div>
 
-      {error && <p className="text-danger mt-5">{error.message}</p>}
+      {error && <p className="text-danger mt-5">{error}</p>}
     </div>
   );
 };

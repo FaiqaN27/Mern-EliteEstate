@@ -80,14 +80,14 @@ const Profile = () => {
   const handleUserSignout = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch("/api/auth/signout");
+      const res = await fetch(`${API_BASE_URL}/api/auth/signout`);
       const data = await res.json();
       if (data.success == false) {
         dispatch(signOutUserFailure(data.message));
         return;
       }
       dispatch(signOutUserSuccess(data));
-    } catch (err) {
+    } catch (error) {
       dispatch(signOutUserFailure(error.message));
     }
   };
@@ -149,7 +149,7 @@ const Profile = () => {
         </Link>
       </form>
 
-      <p className="text-danger mt-5">{error ? error.message : ""}</p>
+      <p className="text-danger mt-5">{error ? error : ""}</p>
       <p className="text-action mt-5">
         {updateSuccess ? "User Is Updated Successfully!" : ""}
       </p>
