@@ -5,9 +5,19 @@ import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/connectDB.js";
+import cors from "cors";
 dotenv.config();
 
 const app = express();
+
+const corsOption = {
+  origin: process.env.FRONTEND_URL,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+  allowedHeaders: ["Content-type", "Authorization"],
+};
+
+app.use(cors(corsOption));
 
 app.use(express.json());
 app.use(cookieParser());
