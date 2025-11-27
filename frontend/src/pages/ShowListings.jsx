@@ -18,7 +18,11 @@ const ShowListings = () => {
       setLoading(true);
       setError(false);
       const res = await fetch(
-        `${API_BASE_URL}/api/user/listings/${currentUser._id}`
+        `${API_BASE_URL}/api/user/listings/${currentUser._id}`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
       );
       const data = await res.json();
       if (data.success === false) {

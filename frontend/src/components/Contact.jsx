@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Contact = ({ listing }) => {
   const [landlord, setLandlord] = useState(null);
@@ -12,7 +13,7 @@ const Contact = ({ listing }) => {
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
-        const res = await fetch(`/api/user/${listing.userRef}`);
+        const res = await fetch(`${API_BASE_URL}/api/user/${listing.userRef}`);
         const data = await res.json();
 
         setLandlord(data);
@@ -28,7 +29,10 @@ const Contact = ({ listing }) => {
       {landlord && (
         <div className="flex flex-col gap-5 mt-4">
           <p>
-            Contact <span className="font-semibold text-primary capitalize">{landlord.username}</span>{" "}
+            Contact{" "}
+            <span className="font-semibold text-primary capitalize">
+              {landlord.username}
+            </span>{" "}
             for{" "}
             <span className="font-semibold">{listing.title.toLowerCase()}</span>
           </p>
@@ -44,12 +48,14 @@ const Contact = ({ listing }) => {
           ></textarea>
 
           <Link
-            to={`mailto:${landlord.email}?subject=${encodeURIComponent(`Regarding ${listing.title}`)}&body= ${encodeURIComponent(message)}`}
+            to={`mailto:${landlord.email}?subject=${encodeURIComponent(
+              `Regarding ${listing.title}`
+            )}&body= ${encodeURIComponent(message)}`}
             className="bg-primary p-3 uppercase rounded-lg text-white font-semibold text-center hover:opacity-90"
           >
             Send Message
           </Link>
-        </div >
+        </div>
       )}
     </>
   );

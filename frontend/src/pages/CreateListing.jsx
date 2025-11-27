@@ -67,6 +67,7 @@ const CreateListing = () => {
 
     const res = await fetch(`${API_BASE_URL}/api/listing/uploadImg`, {
       method: "POST",
+      credentials: "include",
       body: formData,
     });
 
@@ -83,6 +84,7 @@ const CreateListing = () => {
       setDeleting(true);
       await fetch(`${API_BASE_URL}/api/listing/deleteImg`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -132,6 +134,7 @@ const CreateListing = () => {
       setError(false);
       const res = await fetch(`${API_BASE_URL}/api/listing/create`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-type": "application/json",
         },

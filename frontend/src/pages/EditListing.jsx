@@ -32,7 +32,10 @@ const EditListing = () => {
   useEffect(() => {
     const fetchListing = async () => {
       const listingId = params.listingId;
-      const res = await fetch(`${API_BASE_URL}/api/listing/get/${listingId}`);
+      const res = await fetch(`${API_BASE_URL}/api/listing/get/${listingId}`, {
+        method: "GET",
+        credentials: "include",
+      });
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);
@@ -83,6 +86,7 @@ const EditListing = () => {
 
     const res = await fetch(`${API_BASE_URL}/api/listing/uploadImg`, {
       method: "POST",
+      credentials: "include",
       body: formData,
     });
 
@@ -103,6 +107,7 @@ const EditListing = () => {
       setDeleting(true);
       await fetch(`${API_BASE_URL}/api/listing/deleteImg`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -154,6 +159,7 @@ const EditListing = () => {
         `${API_BASE_URL}/api/listing/update/${params.listingId}`,
         {
           method: "PUT",
+          credentials: "include",
           headers: {
             "Content-type": "application/json",
           },
