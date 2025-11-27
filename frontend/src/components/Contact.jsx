@@ -13,7 +13,10 @@ const Contact = ({ listing }) => {
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/user/${listing.userRef}`);
+        const res = await fetch(`${API_BASE_URL}/api/user/${listing.userRef}`, {
+          method: "GET",
+          credentials: "include",
+        });
         const data = await res.json();
 
         setLandlord(data);
