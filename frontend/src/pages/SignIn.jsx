@@ -7,6 +7,7 @@ import {
   signInSuccess,
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -23,8 +24,9 @@ const SignIn = () => {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch("/api/auth/signin", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/signin`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-type": "application/json",
         },

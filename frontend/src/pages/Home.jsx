@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { IoArrowForward } from "react-icons/io5";
 import ListingCard from "../components/ListingCard";
 import Loader from "../components/Loader";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Home = () => {
   const [offerListings, setOfferListings] = useState([]);
@@ -15,7 +16,9 @@ const Home = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const res = await fetch("/api/listing/get?offer=true&limit=4");
+        const res = await fetch(
+          `${API_BASE_URL}/api/listing/get?offer=true&limit=4`
+        );
         const data = await res.json();
         setOfferListings(data);
         fetchSaleListings();
@@ -27,7 +30,9 @@ const Home = () => {
 
     const fetchSaleListings = async () => {
       try {
-        const res = await fetch("/api/listing/get?type=sale&limit=4");
+        const res = await fetch(
+          `${API_BASE_URL}/api/listing/get?type=sale&limit=4`
+        );
         const data = await res.json();
         setSaleListings(data);
         fetchRentListings();
@@ -39,7 +44,9 @@ const Home = () => {
 
     const fetchRentListings = async () => {
       try {
-        const res = await fetch("/api/listing/get?type=rent&limit=4");
+        const res = await fetch(
+          `${API_BASE_URL}/api/listing/get?type=rent&limit=4`
+        );
         const data = await res.json();
         setRentListings(data);
       } catch (error) {

@@ -1,11 +1,11 @@
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { app } from '../firebase';
-import { signInSuccess } from '../redux/user/userSlice';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { app } from "../firebase";
+import { signInSuccess } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const OAuth = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,29 +16,35 @@ const OAuth = () => {
 
       const result = await signInWithPopup(auth, provider);
 
-      const res = await fetch('/api/auth/google', {
-        method: 'POST',
+      const res = await fetch(`${API_BASE_URL}/api/auth/google`, {
+        method: "POST",
+        credentials: "include",
         headers: {
-          'Content-type': 'application/json'
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
           username: result.user.displayName,
           email: result.user.email,
           avatar: result.user.photoURL,
-        })
-      })
+        }),
+      });
       const data = await res.json();
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate("/");
+    } catch (error) {
+      console.log("Counld not sign in with google", error);
     }
-    catch (error) {
-      console.log('Counld not sign in with google', error);
-    }
-  }
+  };
 
   return (
-    <button onClick={handleGoogleSignIn} type="button" className="bg-danger p-3 text-white uppercase rounded-lg font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80">Continue with google</button>
-  )
-}
+    <button
+      onClick={handleGoogleSignIn}
+      type="button"
+      className="bg-danger p-3 text-white uppercase rounded-lg font-semibold cursor-pointer hover:opacity-90 disabled:opacity-80"
+    >
+      Continue with google
+    </button>
+  );
+};
 
 export default OAuth;

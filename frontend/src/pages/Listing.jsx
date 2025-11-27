@@ -15,6 +15,7 @@ import {
 import { useSelector } from "react-redux";
 import Contact from "../components/Contact";
 import Loader from "../components/Loader";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Listing = () => {
   SwiperCore.use([Navigation]);
@@ -33,7 +34,7 @@ const Listing = () => {
       try {
         setLoading(true);
         setError(false);
-        const res = await fetch(`/api/listing/get/${listingId}`);
+        const res = await fetch(`${API_BASE_URL}/api/listing/get/${listingId}`);
         const data = await res.json();
         if (data.success === false) {
           setError(data.message);

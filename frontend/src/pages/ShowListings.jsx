@@ -11,12 +11,15 @@ const ShowListings = () => {
   const [error, setError] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
   const { currentUser } = useSelector((state) => state.user);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const fetchListings = async () => {
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(
+        `${API_BASE_URL}/api/user/listings/${currentUser._id}`
+      );
       const data = await res.json();
       if (data.success === false) {
         setError(data.message);
@@ -37,9 +40,13 @@ const ShowListings = () => {
   const handleDeleteListing = async (listingId) => {
     try {
       setDeletingId(listingId);
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${API_BASE_URL}/api/listing/delete/${listingId}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       if (data.success === false) {

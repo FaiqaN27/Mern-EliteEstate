@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingCard from "../components/ListingCard";
 import Loader from "../components/Loader";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Search = () => {
   const [showMore, setShowMore] = useState(false);
@@ -55,7 +56,9 @@ const Search = () => {
         setShowMore(false);
         setLoading(true);
         const searchQuery = urlParams.toString();
-        const res = await fetch(`/api/listing/get?${searchQuery}`);
+        const res = await fetch(
+          `${API_BASE_URL}/api/listing/get?${searchQuery}`
+        );
         const data = await res.json();
 
         if (data.success === false) {
@@ -126,7 +129,7 @@ const Search = () => {
     const urlParams = new URLSearchParams(location.search);
     urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const res = await fetch(`${API_BASE_URL}/api/listing/get?${searchQuery}`);
     const data = await res.json();
 
     if (data.length < 9) {
