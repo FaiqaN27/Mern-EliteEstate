@@ -1,4 +1,4 @@
-# EliteEstate
+# 🏡 EliteEstate - Your Property, One Click Away
 
 **EliteEstate** is a modern **MERN stack** real estate web application designed for buying, selling, and exploring properties. Users can manage their own listings—add, edit, or delete properties for sale or rent—with images stored on **Cloudinary**.
 
@@ -33,6 +33,13 @@
 - **Authentication:** JWT-based secure authentication
 - **Image Storage:** Cloudinary for property images
 - **Routing:** Protected routes for user actions
+
+---
+
+## 🌍 Live Demo and Source Code
+
+🔗 **Live App:** [https://mern-elite-estate.vercel.app/](https://mern-elite-estate.vercel.app/)  
+💻 **GitHub Repo:** [https://github.com/FaiqaN27/Mern-EliteEstate](https://github.com/FaiqaN27/Mern-EliteEstate)
 
 ---
 
