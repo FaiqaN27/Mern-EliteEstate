@@ -43,6 +43,30 @@
 
 ---
 
+## ⚡ Usage
+
+- **Register/login** to create a user profile.
+- Users can **add property listings** with images uploaded to Cloudinary.
+- Users can **edit or delete** only their own listings.
+- Users can view all their own listings in their profile page.
+- Other users can browse all listings and contact owners via the contact form.
+
+---
+
+## 🖼 Screenshots / Demo
+
+![Home Page](frontend/src/assets/ss0.PNG)
+
+![Search Page](frontend/src/assets/ss1.PNG)
+
+![Listing Page](frontend/src/assets/ss2.PNG)
+
+![SignIn Page](frontend/src/assets/ss3.PNG)
+
+![Contact Page](frontend/src/assets/ss4.PNG)
+
+---
+
 ## 🚀 Installation
 
 ### Backend
@@ -95,30 +119,6 @@ npm install
 ```bash
 npm run dev
 ```
-
----
-
-## ⚡ Usage
-
-- **Register/login** to create a user profile.
-- Users can **add property listings** with images uploaded to Cloudinary.
-- Users can **edit or delete** only their own listings.
-- Users can view all their own listings in their profile page.
-- Other users can browse all listings and contact owners via the contact form.
-
----
-
-## 🖼 Screenshots / Demo
-
-![Home Page](frontend/src/assets/ss0.PNG)
-
-![Search Page](frontend/src/assets/ss1.PNG)
-
-![Listing Page](frontend/src/assets/ss2.PNG)
-
-![SignIn Page](frontend/src/assets/ss3.PNG)
-
-![Contact Page](frontend/src/assets/ss4.PNG)
 
 ---
 
