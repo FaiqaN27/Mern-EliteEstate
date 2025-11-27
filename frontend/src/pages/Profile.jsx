@@ -12,6 +12,7 @@ import {
   updateUserSuccess,
 } from "../redux/user/userSlice";
 import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const Profile = () => {
   const [formData, setFormData] = useState({});
@@ -81,6 +82,10 @@ const Profile = () => {
       dispatch(signOutUserFailure(error.message));
     }
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="p-3 max-w-lg mx-auto mb-12">
@@ -162,6 +167,7 @@ const Profile = () => {
           </span>
         </Link>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingCard from "../components/ListingCard";
+import Loader from "../components/Loader";
 
 const Search = () => {
   const [showMore, setShowMore] = useState(false);
@@ -39,14 +40,14 @@ const Search = () => {
       orderFromUrl
     ) {
       setSidebarData({
-        searchTerm: searchTermFromUrl || '',
-        type: typeFromUrl || 'all',
-        parking: parkingFromUrl === 'true' ? true : false,
-        furnished: furnishedFromUrl === 'true' ? true : false,
-        offer: offerFromUrl === 'true' ? true : false,
-        sort: sortFromUrl || 'createdAt',
-        order: orderFromUrl || 'desc',
-      })
+        searchTerm: searchTermFromUrl || "",
+        type: typeFromUrl || "all",
+        parking: parkingFromUrl === "true" ? true : false,
+        furnished: furnishedFromUrl === "true" ? true : false,
+        offer: offerFromUrl === "true" ? true : false,
+        sort: sortFromUrl || "createdAt",
+        order: orderFromUrl || "desc",
+      });
     }
 
     const fetchListings = async () => {
@@ -70,15 +71,13 @@ const Search = () => {
         }
         setListings(data);
         setLoading(false);
-      }
-      catch (error) {
+      } catch (error) {
         setError(error.message);
         setLoading(false);
       }
-    }
+    };
 
     fetchListings();
-
   }, [location.search]);
 
   const handleChange = (e) => {
@@ -88,9 +87,7 @@ const Search = () => {
       e.target.id === "sale"
     ) {
       setSidebarData({ ...sidebarData, type: e.target.id });
-    }
-
-    else if (
+    } else if (
       e.target.id === "offer" ||
       e.target.id === "parking" ||
       e.target.id === "furnished"
@@ -100,13 +97,9 @@ const Search = () => {
         [e.target.id]:
           e.target.checked || e.target.checked === "true" ? true : false,
       });
-    }
-
-    else if (e.target.id === "searchTerm") {
+    } else if (e.target.id === "searchTerm") {
       setSidebarData({ ...sidebarData, [e.target.id]: e.target.value });
-    }
-
-    else if (e.target.id === "sort_order") {
+    } else if (e.target.id === "sort_order") {
       const sort = e.target.value.split("_")[0] || "createdAt";
       const order = e.target.value.split("_")[1] || "desc";
       setSidebarData({ ...sidebarData, sort, order });
@@ -131,7 +124,7 @@ const Search = () => {
     const numberOfListings = listings.length;
     const startIndex = numberOfListings;
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set('startIndex', startIndex);
+    urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
     const res = await fetch(`/api/listing/get?${searchQuery}`);
     const data = await res.json();
@@ -141,11 +134,10 @@ const Search = () => {
     }
 
     setListings([...listings, ...data]);
-  }
+  };
 
   return (
     <div className="flex flex-col md:flex-row">
-
       <div className="p-7 border-b-2 border-background md:border-r-2 md:min-h-screen">
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="flex items-center gap-2">
@@ -264,35 +256,33 @@ const Search = () => {
         </h1>
 
         <div className="p-7 flex flex-wrap gap-4">
-          {
-            loading && (
-              <div className="flex justify-center items-center h-[60vh] w-full">
-                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-              </div>
-            )
-          }
+          {loading && <Loader />}
 
           {!loading && !error && listings.length === 0 && (
             <p className="text-xl text-slate-700">No Listing found!</p>
           )}
 
-          {!loading && listings && listings.map((listing) => (<ListingCard listing={listing} key={listing._id} />))}
+          {!loading &&
+            listings &&
+            listings.map((listing) => (
+              <ListingCard listing={listing} key={listing._id} />
+            ))}
         </div>
 
-
         {showMore && (
-          <button className="text-action font-semibold hover:underline text-center w-full pb-7 cursor-pointer" onClick={handleShowMoreClick}>Show more</button>
+          <button
+            className="text-action font-semibold hover:underline text-center w-full pb-7 cursor-pointer"
+            onClick={handleShowMoreClick}
+          >
+            Show more
+          </button>
         )}
 
-        {
-          error && (
-            <p className="text-center text-2xl text-danger mt-7">{error}</p>
-          )
-        }
+        {error && (
+          <p className="text-center text-2xl text-danger mt-7">{error}</p>
+        )}
       </div>
-
-
-    </div >
+    </div>
   );
 };
 

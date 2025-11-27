@@ -4,11 +4,13 @@ import GetInTouch from "../components/GetInTouch";
 import { useEffect, useState } from "react";
 import { IoArrowForward } from "react-icons/io5";
 import ListingCard from "../components/ListingCard";
+import Loader from "../components/Loader";
 
 const Home = () => {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -18,6 +20,7 @@ const Home = () => {
         setOfferListings(data);
         fetchSaleListings();
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -29,6 +32,7 @@ const Home = () => {
         setSaleListings(data);
         fetchRentListings();
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -40,11 +44,18 @@ const Home = () => {
         setRentListings(data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchListings();
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div>
       {/* HERO SECTION */}
