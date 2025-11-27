@@ -1,4 +1,4 @@
-import { mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 let retryCount = 0;
 const maxRetries = 5;
@@ -10,10 +10,10 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 45000,
-      retryWrite: true,
+      retryWrites: true,
       maxPoolSize: 10,
     });
-    console.log(`MongoDB Connected: ${data.connection.host}`);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
     retryCount = 0;
   } catch (err) {
     console.log(
@@ -42,7 +42,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 mongoose.connection.on("reconnected", () => {
-  console.log("MongoDB reconnected sucessfully!");
+  console.log("MongoDB reconnected successfully!");
 });
 
 export default connectDB;
